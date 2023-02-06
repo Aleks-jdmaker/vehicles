@@ -1,28 +1,36 @@
 import vehicles.*;
+import java.util.List;
+
+import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
-        Vehicle airplane = new Airplane(); // Создаём новый экземпляр класса самолёт с помощью конструктора.
-        System.out.println(airplane); // Выводим на экран, поскольку у него есть метод toString.
+        List <Vehicle> vehicles = new ArrayList<>(); //Создаём список экземпляров (инстансов, объектов)
+        // <Vehicle> - generic, означает что в данный список нельзя положить ничего, кроме экземпляров типа Vehicle.
+        // vehicles.add("Hello"); - не срабатает, т.к. не совпадают типы листа и экземпляра.
+        // "Hello" - это тип String, а тип листа Vehicle.
 
-        Vehicle lada = new Lada();
-        System.out.println(lada);
+        // Vehicle vehicle = new Vehicle(); - так делать нельзя, потому что класс абстрактный.
 
-        Vehicle ambulance = new Ambulance();
-        System.out.println(ambulance);
+        // Surroundings water = Surroundings.WOTER; - так сделать не получится, потому что
+        // в Surroundings нет элемента WOTER, есть только WATER.
 
-        Vehicle boat = new Boat();
-        System.out.println(boat);
+        Vehicle shuttle = new Shuttle(); // Создаём экзепляр
+        vehicles.add(shuttle);           // и помещаем его в лист.
 
-        Vehicle sailboat = new Sailboat();
-        System.out.println(sailboat);
+        vehicles.add(new Airplane());    // Создаём анонимный экзепляр прямо в вызове метода add
+                                         // и сразу он сам помещается в лист.
+        vehicles.add(new Lada());
+        vehicles.add(new Ambulance());
+        vehicles.add(new Boat());
+        vehicles.add(new Sailboat());
+        vehicles.add(new Rocket());
 
-        Vehicle rocket = new Rocket();
-        System.out.println(rocket);
 
-        Vehicle shuttle = new Shuttle();
-        System.out.println(shuttle);
-
-        //TODO: реализовать класс rocket c подклассами шатлы и т.д.
+        for (Vehicle vehicle : vehicles){ // Цикл for для вывода экземпляров листа на экран.
+            System.out.println(vehicle);  // Переменная vehicle "живёт" только внутри цикла.
+                                          // Поскольку класс Vehicle имеет собственную реализацию метода toString,
+                                          // его можно сразу же использовать как строку.
+        }
     }
 }
